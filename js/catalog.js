@@ -24,33 +24,46 @@ function populateForm() {
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
 
-  // TODO: Prevent the page from reloading
+  // DONE: Prevent the page from reloading
   event.preventDefault();
   // Do all the things ...
   addSelectedItemToCart();
   cart.saveToLocalStorage();
   updateCounter();
   updateCartPreview();
-  let stringCart = JSON.stringify(cart);
-  localStorage.setItem('cart', stringCart);
 }
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
-  // DONE: suss out the item picked from the select list
+  // DONE: suss out the item picked from the select listd 
   let itemPicked = document.getElementById('items').value;
+  console.log(itemPicked);
   // DONE: get the quantity
   let amountPicked = document.getElementById('quantity').value;
-  // TODO: using those, add one item to the Cart
+  console.log(amountPicked);
+  // DONE: using those, add one item to the Cart
+  cart.addItem(itemPicked, amountPicked);
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+// DONE: Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() {
+  let span = document.getElementById('itemCount');
+  span.textContent = ` : ${cart.items.length} item(s)`;
+}
 
-// TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+// DONE: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
-  // TODO: Add a new element to the cartContents div with that information
+  // DONE: Get the item and quantity from the form: add in line 37 contents
+  let itemPicked = document.getElementById('items').value;
+  console.log(itemPicked);
+  let amountPicked = document.getElementById('quantity').value;
+  console.log(amountPicked);
+  // DONE: Add a new element to the cartContents div with that information
+  let p = document.createElement('p');
+  p.textContent = `itemPicked : ${itemPicked} amountPicked : ${amountPicked}`;
+  cartContents.appendChild(p);
+  // window into the dom
+  // create element , give content, append to the partent (parent === window into the dom)
 }
 
 // Set up the "submit" event listener on the form.
